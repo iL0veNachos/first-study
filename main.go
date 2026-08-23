@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"study/feature"
 	"study/feature2"
+	simpleconnection "study/feature_postgres/simple_connection"
 )
 
 func main() {
@@ -12,4 +13,5 @@ func main() {
 	feature.Feature()
 	feature2.Feature2()
 	fmt.Println("okey")
+	simpleconnection.CheckConnect()
 }
