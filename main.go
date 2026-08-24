@@ -13,12 +13,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	if err := simple_sql.CreateTable(ctx, conn); err != nil {
+
+	rows, err := simple_sql.SelectRow(ctx, conn)
+	if err != nil {
 		panic(err)
 	}
 
-	if err := simple_sql.InsertRow(ctx, conn); err != nil {
-		panic(err)
+	for _, val := range rows {
+		val.Print()
 	}
+
 	fmt.Println("succeed")
 }

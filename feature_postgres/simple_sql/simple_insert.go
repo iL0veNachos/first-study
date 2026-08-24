@@ -6,11 +6,18 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func InsertRow(ctx context.Context, conn *pgx.Conn) error {
+func InsertRow(ctx context.Context, conn *pgx.Conn, task TaskModel) error {
 	sqlQuery := `
 	INSERT INTO tasks (title, description, completed, created_at)
-	VALUES ('Domashka', 'To do math homework a', FALSE, '2025-11-26 18:01:05');
+	VALUES ($1, $2, $3, $4);
 	`
-	_, err := conn.Exec(ctx, sqlQuery)
+	_, err := conn.Exec(
+		ctx,
+		sqlQuery,
+		task.title,
+		task.description,
+		task.completed,
+		task.created_at,
+	)
 	return err
 }
