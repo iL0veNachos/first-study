@@ -1,17 +1,27 @@
 package main
 
 import (
+	"context"
 	"fmt"
-	"study/feature"
-	"study/feature2"
 	simpleconnection "study/feature_postgres/simple_connection"
+	"study/feature_postgres/simple_sql"
 )
 
 func main() {
+	ctx := context.Background()
+	conn, err := simpleconnection.CreateConnection(ctx)
+	if err != nil {
+		panic(err)
+	}
 
-	fmt.Println("Hello from main")
-	feature.Feature()
-	feature2.Feature2()
-	fmt.Println("okey")
-	simpleconnection.CheckConnect()
+	rows, err := simple_sql.SelectRow(ctx, conn)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, val := range rows {
+		val.Print()
+	}
+
+	fmt.Println("succeed")
 }
