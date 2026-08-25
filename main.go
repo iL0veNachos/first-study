@@ -14,14 +14,14 @@ func main() {
 		panic(err)
 	}
 
-	rows, err := simple_sql.SelectRow(ctx, conn)
+	_, err = simple_sql.SelectRow(ctx, conn)
 	if err != nil {
 		panic(err)
 	}
 
-	for _, val := range rows {
-		val.Print()
-	}
+	// for _, val := range rows {
+	// 	val.Print()
+	// }
 
 	fmt.Println("succeed")
 }
