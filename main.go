@@ -1,27 +1,16 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	simpleconnection "study/feature_postgres/simple_connection"
-	"study/feature_postgres/simple_sql"
+	"study/http_server"
 )
 
 func main() {
-	ctx := context.Background()
-	conn, err := simpleconnection.CreateConnection(ctx)
+	fmt.Println("Starting server...")
+	err := http_server.StartHTTPServer()
 	if err != nil {
-		panic(err)
+		fmt.Println("Something went wrong with server starting", err)
 	}
 
-	_, err = simple_sql.SelectRow(ctx, conn)
-	if err != nil {
-		panic(err)
-	}
-
-	// for _, val := range rows {
-	// 	val.Print()
-	// }
-
-	fmt.Println("succeed")
+	fmt.Println("Server otrabotal succeed")
 }
